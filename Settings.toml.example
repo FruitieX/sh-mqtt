@@ -1,0 +1,38 @@
+[mqtt]
+# ID used when connecting MQTT client, needs to be unique across MQTT clients connected to the broker
+id = "sh-mqtt"
+
+# Domain name / IP address and port of the MQTT broker
+host = "test.mosquitto.org"
+port = 1883
+
+# Sample MQTT topic that will be subscribed to
+[topics.example1]
+topic = "home/sensors/example1"
+
+# Run a script when a specific value is received on the topic
+[topics.example1.commands.script]
+rule = { matching_value = "run_script" }
+cmd = "/usr/bin/bash"
+args = ["test_script.sh"]
+
+# Multiple commands can be defined for the same topic
+[topics.example1.commands.echo]
+rule = { matching_value = "do_echo" }
+cmd = "/usr/bin/bash"
+args = ["-c", "echo 'Hello from example1'"]
+
+# Another MQTT topic 
+[topics.entryway_light]
+topic = "home/lights/entryway"
+
+# Example of JSON pointer rules
+[topics.entryway_light.commands.turn_off_dashboard_screen]
+rule = { ptr = "/power", matching_value = false }
+cmd = "/usr/bin/bash"
+args = ["screen_off.sh"]
+
+[topics.entryway_light.commands.turn_on_dashboard_screen]
+rule = { ptr = "/power", matching_value = true }
+cmd = "/usr/bin/bash"
+args = ["screen_on.sh"]
