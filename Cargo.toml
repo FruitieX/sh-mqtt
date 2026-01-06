@@ -12,5 +12,5 @@ jsonptr = "=0.7.1"
 rand = "=0.9.2"
 rumqttc = "=0.25.1"
 serde = "=1.0.228"
-serde_json = "=1.0.148"
+serde_json = "=1.0.149"
 tokio = { version = "=1.49.0", features = ["full"] }
